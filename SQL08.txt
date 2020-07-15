@@ -1,95 +1,71 @@
-﻿C#企业级开发技术练习8答题卡
+信息系统与数据库技术练习8答题卡
 
-班级：    信息管理1班 
-姓名：    吴兆骐
+班级：     计算机信息管理
+姓名：     吴兆骐
 学号：     20190307124
 
 注：请将答案放置在序号下方。*/
 
 （一）
-using System;
-using System.Collections.Generic;
+1.
+USE EDUC
 
-namespace ConsoleApp2
-{
-    class Program
-    {        
-        static void Main(string[] args)
-        {
-            LinkedList<float> kset = new LinkedList<float>();
-            kset.AddFirst(12.3f);
-            kset.AddFirst(42.5f);
-            kset.AddLast(9f);
-            kset.AddLast(7.2f);
-            kset.AddAfter(kset.Find(12.3f), 8.6f);
-            var node1 = kset.Find(12.3f);
-            var node2 = node1.Next;
-            kset.Remove(node2);
-            kset.AddBefore
-                (node1, node2.Value);
-            foreach (float n in kset)
-                Console.WriteLine(n);
-        }
-    }
-}
+2.
+UPDATE Books
+SET Price=35.6,Author='张建林'
+WHERE Bname='高等数学'
+
+3.
+UPDATE Books
+SET Discount=Discount-0.05
+
+4.
+SELECT *
+FROM Books
+
+5.
+SELECT TOP 10 *
+FROM Student
+
+6.
+SELECT TOP 20 PERCENT *
+FROM SC
+
+7.
+SELECT *
+FROM Student
+WHERE Sex='女'
+
+8.
+SELECT *
+FROM SC
+WHERE SCscore<60
+
+9.
+SELECT Bname,Author,Publisher,ISBN
+FROM Books
+
+10.
+SELECT DISTINCT Cid
+FROM SC 
+
+11.
+SELECT Bname,Author,Publisher,PublisherDate
+FROM Books 
+WHERE YEAR(PublisherDate)=2012
+
+12.
+SELECT Sid AS 学号,Cid AS 课程号,SCscore AS 成绩
+FROM SC
+
+13.
+SELECT Sid,Sname,Sex,DATEDIFF(YY,Birth,GETDATE()) AS Age
+FROM Student
+
+14.
+SELECT *,Price*Discount AS DiscountPrice,Price*Discount-Price AS Economize
+FROM Books
 
 
-（二）
-using System;
-using System.Collections.Generic;
-
-namespace ConsoleApp2
-{
-    class Program
-    {
-        class Dorder<T> : IComparer<T> where T:IComparable
-         {
-            public int Compare(T m, T n) => 
-            n.CompareTo(m);
-          }
-        static void Main(string[] args)
-        {
-            SortedSet<long> order1 =
-                 new SortedSet<long>(new Dorder<long>()){ 15, 8, 45, 6 };
-            foreach ( long i in order1) Console.WriteLine(i);
-           SortedSet<string> order2 =
-                 new SortedSet<string>(new Dorder<string>()) { "jsp", "asp", "php" };
-            foreach (string i in order2) Console.WriteLine(i);
-            SortedSet<DateTime> order3 =
-                 new SortedSet<DateTime>(new Dorder<DateTime>())
-                 { new DateTime(2012,5,6),new DateTime(2011,5,6),new DateTime(2013,5,6) };
-            foreach (DateTime i in order3) Console.WriteLine(i);
-
-        }
-    }
-}
-
-（三）
-using System;
-using System.Collections.Generic;
-
-namespace ConsoleApp2
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-           IEnumerable<decimal>Pass(List<decimal>scores)
-            {
-                foreach (decimal sc in scores)
-                {
-                    if(sc>60)yield return sc;
-                }
-            }
-            List<decimal> scSet = new List<decimal> { 80.5m, 56m, 71m, 70.5m, 49m };
-            IEnumerable<decimal> passSet = Pass(scSet);
-            Console.WriteLine("以下成绩及格");
-            foreach (decimal n in passSet)
-            {
-                Console.WriteLine(n);
-            }
-        }
-    }
-}
 
 
